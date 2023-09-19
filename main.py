@@ -66,6 +66,19 @@ def drop_block():
         block.y += 1
 
 
+def side_move(dx):
+    can_side_move = True
+    for y in range(3):
+        for x in range(3):
+            if y * 3 + x in block.shape():
+                if block.x + x >= cols - 1 and dx == 1:
+                  can_side_move = False
+                elif block.x + x <= 0 and dx == -1:
+                    can_side_move = False
+    if can_side_move:
+      block.x += dx
+
+
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 pygame.display.set_caption("Tetris")
@@ -73,9 +86,9 @@ game_over = False
 block = Block(8, 8)
 
 clock = pygame.time.Clock()
-fps = 2
+fps = 10
 
-grid_size = 40
+grid_size = 20
 rows = screen.get_height() // grid_size
 cols = screen.get_width() // grid_size
 x_gap = (screen.get_width() - (cols * grid_size)) // 2
@@ -87,10 +100,16 @@ while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            side_move(-1)
+        if event.key == pygame.K_RIGHT:
+            side_move(1)
     screen.fill((0, 0, 0))  # paint screen black
     draw_grid(rows, cols, grid_size, x_gap, y_gap)
     draw_block()
-    drop_block()
+    if event.type != pygame.KEYDOWN:
+        drop_block()
 
     pygame.display.update()
 pygame.quit()
