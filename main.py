@@ -2,6 +2,15 @@ import pygame
 import random
 
 pygame.init()
+pygame.mixer.init()
+
+
+# Load the music file
+pygame.mixer.music.load('./media/Tetris.mp3')  # Replace 'your_song.mp3' with the path to your music file
+
+# Start playing the music
+pygame.mixer.music.play(-1)
+
 
 # **** Blocks ****
 #   [0][1][2]
