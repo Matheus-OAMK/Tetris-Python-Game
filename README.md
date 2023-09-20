@@ -20,7 +20,7 @@ In Tetris, your goal is to manipulate different-shaped blocks as they fall from 
 1. Clone this repository to your local machine:
 
 ```bash
- git clone https://github.com/Matheus-OAMK/Tetris-Python-Game-.git
+ git https://github.com/Matheus-OAMK/Tetris-Python-Game.git
 ```
 
 2. Install the required packages using pip:
